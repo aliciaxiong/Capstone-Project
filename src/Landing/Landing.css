@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.landingphoto {
+    width: 100%;
+    height: 100%;
+    transition: opacity .5s ease-in-out;
+    margin-bottom: 0px;
+    margin-top: 3px;
+}
+
+.landingphoto:hover {
+    opacity: 0.5;
+}
+
+.landing0:hover .LandingText1 {
+    color: black;
+}
+
+.landing0:hover .LandingText2 {
+    color: black;
+}
+
+.landing0 {
+    position: relative;
+}
+
+.LandingText1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: xxx-large;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.LandingText2 {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: xx-large;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 4px #000000;
+}

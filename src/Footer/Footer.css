@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    background-color: rgb(80, 0, 0);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 13px;
+    font-size: 16px;
+}
+
+.footer0 {
+    text-align: center;
+}
+
+.footer1, .footer5, .footer3 {
+    margin: 2.5px;
+}
+
+.TOS {
+    font-size: 16px;
+}
