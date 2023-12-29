@@ -7,14 +7,18 @@ const Navbar = () => {
         <div>
             <header>
                 <nav>
+                    <div className="NavInfo"> 
+                    <a href="#">Homeowners</a>
+                    <a href="#">Vendors</a>
+                    </div>
+
                     <div>
                         <img className="logo" src={logo} alt="nav-logo"/>
                     </div>
+
                     <div className="NavInfo"> 
-                        <a href="/">Home</a>
-                        <a href="/about">About</a>
-                        <a href="/signin">Sign In</a>
-                        <a href="/signup">Sign Up</a>
+                        <a href="#">Sign In</a>
+                        <a href="#">Sign Up</a>
                     </div>
                 </nav>
             </header>

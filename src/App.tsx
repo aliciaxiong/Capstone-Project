@@ -1,7 +1,8 @@
-import React from 'react'
-import Navbar from './Navbar/Navbar'
-import Landing from './Landing/Landing'
-import Footer from './Footer/Footer'
+import Landing from "./Landing/Landing"
+import Navbar from "./Navbar/Navbar"
+import Signin from "./Sign In/Signin"
+import Signup from "./Sign Up/Signup"
+import Search from "./Search/Search"
 
 function App() {
 
@@ -9,7 +10,9 @@ function App() {
     <>
       <Navbar/>
       <Landing/>
-      <Footer/>
+      <Signin/>
+      <Signup/>
+      <Search/>
     </>
   )
 }
