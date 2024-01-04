@@ -5,6 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth"
 import { auth } from "../firebase"
 import { useState, useEffect } from "react"
 import signouticon from "../images/signouticon.png"
+import { useNavigate } from "react-router-dom"
 
 interface IUser {
     email: string,
@@ -32,13 +33,16 @@ function Navbar() {
         return () => unsubscribe();
     }, [])
     
+const navigate = useNavigate();
+
     const handleSignOut = () => {
         signOut(auth)
         .then(() => {
             console.log("Signed Out Successfully")
             setUser({
                 email: "",
-            })  
+            })
+            navigate("/");  
         })
         .catch((error) => {
             console.log(error)

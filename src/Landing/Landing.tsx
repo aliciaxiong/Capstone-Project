@@ -11,7 +11,7 @@ const Landing = () => {
         </div>
 
         <div>
-          <p className="LandingText2"> Discover A New Innovation to Protect your Home Value. Unlock your key to staying ahead! Track your home's value effortlessly, join now at Zero Cost for a smarter approach to homeownership!</p>
+          <p className="LandingText2"> Discover A New Innovation to Protect your Home Value. Unlock your key to staying ahead! Track your home's value effortlessly, join now at <u>Zero Cost</u> for a smarter approach to homeownership!</p>
         </div>
 
           <video className="landingvideo" autoPlay loop muted>

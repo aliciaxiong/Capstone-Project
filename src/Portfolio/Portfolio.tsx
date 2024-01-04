@@ -41,33 +41,49 @@ const Portfolio: React.FC = () => {
   if (auth.currentUser?.uid) {
     const propertyDoc = doc(db, "users", auth.currentUser.uid, "homes", abbreviatedAddress);
     await deleteDoc(propertyDoc);
-  } 
+  } else {
+    console.error("Delete Error")
+  }
 };
 
   return (
     <>
       <div>
         <h1>Portfolio</h1>
+        <div>
+          <h2 className="total-equity">Estimated Total Equity: ${Number(properties.reduce((total, property) => total + property.zestimate - property.lastSoldPrice, 0)).toLocaleString()}</h2>
+        </div>
         <div className="Info-Container">
           {properties.map((property, index) => (
-            <div key={index} className="portfolio-container1">
+            <div key={property.id} className="portfolio-container1">
               <div className="portfolio-container"> 
                 <table>
                   <tbody>
-                    <img className="placeholder-photo" src="https://vermontframes.com/wp-content/uploads/2020/12/placeholder.png" alt="user" className="user-img"/>
+                    <tr>
+                      <td>
+                        <img className="placeholder-photo" src="https://vermontframes.com/wp-content/uploads/2020/12/placeholder.png" alt="user" className="user-img"/>
+                      </td>
+                    </tr>
                   </tbody>
                   <tbody>
-                    <p><b>{property.abbreviatedAddress}</b></p>
-                    <p>Current Value: ${Number(property.zestimate).toLocaleString()}</p>
-                    <p>Last Sold: ${Number(property.lastSoldPrice).toLocaleString()}</p>
-                    <p>Bedrooms: {property.bedrooms}</p>
-                    <p>Bathrooms: {property.bathrooms}</p>
-                    <p>Living Area: {Number(property.livingArea).toLocaleString()}</p>
-                    <p>Lot Size: {Number(property.lotSize).toLocaleString()}</p>
-                    <p>Year Built: {property.yearBuilt}</p>
+                    <tr>
+                      <td>
+                        <p><b>{property.abbreviatedAddress}</b></p>
+                        <p>Current Value: ${Number(property.zestimate).toLocaleString()}</p>
+                        <p>Last Sold: ${Number(property.lastSoldPrice).toLocaleString()}</p>
+                        <p>Bed: {property.bedrooms} | Bath: {property.bathrooms}</p>
+                        <p>Living Area: {Number(property.livingArea).toLocaleString()}</p>
+                        <p>Lot Size: {Number(property.lotSize).toLocaleString()}</p>
+                        <p>Year Built: {property.yearBuilt}</p>
+                      </td>
+                    </tr>
                   </tbody>
                   <tbody className='btn-container'>
-                    <button className="delete-btn" onClick={() => deleteProperty(property.abbreviatedAddress)}>Delete</button>                  
+                    <tr>
+                      <td>
+                        <button className="delete-btn" onClick={() => deleteProperty(property.abbreviatedAddress)}>Delete</button>                  
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
