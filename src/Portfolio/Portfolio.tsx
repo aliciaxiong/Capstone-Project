@@ -48,34 +48,33 @@ const Portfolio: React.FC = () => {
     <>
       <div>
         <h1>Portfolio</h1>
-        {properties.map((property, index) => (
-          <div key={index} className="portfolio-container1">
-            <div>
+        <div className="Info-Container">
+          {properties.map((property, index) => (
+            <div key={index} className="portfolio-container1">
               <div className="portfolio-container"> 
                 <table>
                   <tbody>
                     <img className="placeholder-photo" src="https://vermontframes.com/wp-content/uploads/2020/12/placeholder.png" alt="user" className="user-img"/>
                   </tbody>
-
                   <tbody>
                     <p><b>{property.abbreviatedAddress}</b></p>
-                    <p>Current Value: ${property.zestimate}</p>
-                    <p>Last Sold: ${property.lastSoldPrice}</p>
+                    <p>Current Value: ${Number(property.zestimate).toLocaleString()}</p>
+                    <p>Last Sold: ${Number(property.lastSoldPrice).toLocaleString()}</p>
                     <p>Bedrooms: {property.bedrooms}</p>
                     <p>Bathrooms: {property.bathrooms}</p>
-                    <p>Living Area: {property.livingArea}</p>
-                    <p>Lot Size: {property.lotSize}</p>
+                    <p>Living Area: {Number(property.livingArea).toLocaleString()}</p>
+                    <p>Lot Size: {Number(property.lotSize).toLocaleString()}</p>
                     <p>Year Built: {property.yearBuilt}</p>
                   </tbody>
-
                   <tbody className='btn-container'>
-                  <button className="delete-btn" onClick={() => deleteProperty(property.id)}>Delete</button>                  </tbody>
+                    <button className="delete-btn" onClick={() => deleteProperty(property.abbreviatedAddress)}>Delete</button>                  
+                  </tbody>
                 </table>
               </div>
             </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
     </>
   );
 };
