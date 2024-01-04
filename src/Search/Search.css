@@ -1,6 +1,8 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+
 }
 
 body {
@@ -13,6 +15,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
     margin-top: 30px;
 }
 
@@ -56,27 +59,30 @@ form {
 
 .PropertyContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     margin-top: 20px;
     padding: 20px;
-}
-
-.placeholderimage1 {
-    width: 500px;
-    height: 300px;
-    background-color: #399B53;
 }
 
 .propertydetails {
     font-size: large;
     margin-left: 50px;
     margin-right: 50px;
-    margin-top: 30px;
+    margin-top: 30px;;
+}
+
+h2 {
+    margin-bottom: 30px;
+    text-align: center;
+    margin-top: -40px;
+
 }
 
 P {
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .Add-Btn {
@@ -86,7 +92,7 @@ P {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    margin: 10px;
+    margin-top: 20px;
     color: white;
     border-radius: 5px;
     background-color: #399B53;

@@ -9,29 +9,24 @@ body {
 
 .signincontainer {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 img {
-    width: 100px;
+    width:120px;
     height: auto;
-    color:#399B53;
 }
 
-h1 {
+.signIn-Header {
     font-size: 30px;
-    margin-bottom: 3px;
+    color: #399B53;
+    margin-top: -20px;
 }
 
-p {
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-form {
+.signIn-Form {
     width: 30%;
     height: 60%;
     display: flex;
@@ -51,9 +46,32 @@ form {
 }
 
 .ForgotPassword {
-    font-size: 10px;
+    font-size: 20px;
     color: #399B53;
     text-decoration: none;
     margin-top: -10px;
     margin-bottom: -10px;
+}
+
+.signIn-Button {
+    width: 300px;
+    height: 30px;
+    font-size: 16px;
+    background-color: #399B53;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signIn-Button:hover {
+    background-color: #000000;
+}
+
+.forgotpass {
+    color: gray;
+}
+
+.forgotpass:hover {
+    text-decoration: underline;
 }

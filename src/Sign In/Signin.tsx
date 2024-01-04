@@ -1,31 +1,57 @@
+import React, { useState } from "react";
 import "./Signin.css"
-import hvlogo from "../images/hvlogo.png"
+import logo from "../images/logo.png"
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../firebase";
 
-const Signin = () => {
+function Signin () {
+
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, user.email, user.password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user);
+      navigate ("/landing")
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(`${errorCode}: ${errorMessage}`);
+    });
+  
+}
   return (
     <>
       <div className="signincontainer">
-        <form>
-          <img src={hvlogo} alt="logo" />
-          <h1>Sign In</h1>
+
+        <form className="signIn-Form" onSubmit={handleSubmit}>
+          <img src={logo} alt="logo" />
+
+          <h1 className="signIn-Header">Sign In</h1>
+
           <div>
-            <p>Please fill in this form to create an account.</p>
+            <input className="inputsignin" type="email" placeholder="Email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} required/>
           </div>
 
           <div>
-            <input className="inputsignin" type="email" name="" placeholder="Email" />
-          </div>
-
-          <div>
-            <input className="inputsignin" type="password" name="" placeholder="Password" />  
-          </div>
+            <input className="inputsignin" type="password" placeholder="Password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} required />          </div>
 
           <div className="ForgotPassword">
-            <a href="#">Forgot Password</a>
+            <p className="forgotpass">Forgot Password</p>
           </div>
 
           <div>
-            <button>Sign In</button>
+              <button className="signIn-Button" type="submit">Sign In</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import "./Search.css";
 import { useState } from "react";
-import houseimage from "../images/houseimage.jpg";
+import { collection, addDoc } from "firebase/firestore";
+import { db, auth } from "../firebase";
 
 // Define Interface
 interface Address {
@@ -10,7 +11,7 @@ interface Address {
   zipcode: string;
 }
 
-interface Property {
+export interface Property {
   abbreviatedAddress: string;
   address: Address;
   bathrooms: number;
@@ -22,14 +23,41 @@ interface Property {
   livingArea: number;
 }
 
+// interface SearchProps {
+//   addToPortfolio: (property: Property) => void;
+// } 
+
 //State Input Value and Fetched Info
-const Search = () => {
+const Search: React.FC = ({  }) => {
   const [search_Input, setSearch_Input] = useState("");
   const [properties, setProperties] = useState<Property[]>([]);
+  const [portfolio, setPortfolio] = useState<Property[]>([]);
 
   // Handle Input Changes 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch_Input(event.target.value);
+  };
+
+  // Add Property to Firebase
+  const addtoPort = async () => {
+    if (auth.currentUser?.uid && properties.length > 0) {
+      const property = properties[0];
+      setPortfolio((prevPortfolio) => [...prevPortfolio, property]);
+      alert('Property has been added to the portfolio');
+
+      const userCollection = collection(db, "users", auth.currentUser.uid, "homes");
+      await addDoc(userCollection, {
+        abbreviatedAddress: property.abbreviatedAddress,
+        address: property.address,
+        bathrooms: property.bathrooms,
+        bedrooms: property.bedrooms,
+        yearBuilt: property.yearBuilt,
+        zestimate: property.zestimate,
+        lotSize: property.lotSize,
+        lastSoldPrice: property.lastSoldPrice,
+        livingArea: property.livingArea,
+      });
+    }
   };
 
   // Fetch Property Info after submission 
@@ -52,6 +80,7 @@ const Search = () => {
     getProperty();
   };
 
+
   return (
     <>
       <div className="SearchContainer">
@@ -67,23 +96,19 @@ const Search = () => {
             {properties.map((property, index) => (
               <div key={index} className="PropertyContainer">
 
-                <div className="placeholdercontainer">
-                  <img className="placeholderimage1" src={houseimage} alt="logo" />
-                </div>
-
                 <div className="propertydetails">
+                  <h2>Property Details</h2>
                   <p><b>{property.abbreviatedAddress}, {property.address.city}, {property.address.state} {property.address.zipcode}</b> </p>
-                  <p>Current Value: ${property.zestimate}</p>
-                  <p>Last Sold: ${property.lastSoldPrice ?? 'No Information Available'}</p>
+                  <p>Current Value: ${Number(property.zestimate).toLocaleString()}</p>
+                  <p>Last Sold: ${property.lastSoldPrice ? Number(property.lastSoldPrice).toLocaleString() : 'No Information Available'}</p>
                   <p>Bedroom: {property.bedrooms ?? 'No Information Available'}</p>
                   <p>Bathroom: {property.bathrooms ?? 'No Information Available'}</p>
-                  <p>Living Area: {property.livingArea ?? 'No Information Available'}</p>
-                  <p>Lot Size: {property.lotSize ?? 'No Information Available'} SQFT </p>
-                  <p>Year Built: {property.yearBuilt ?? 'No Information Available'}</p>
+                  <p>Living Area: {property.livingArea ? Number(property.livingArea).toLocaleString() : 'No Information Available'} SQFT</p>
+                  <p>Lot Size: {property.lotSize ? Number(property.lotSize).toLocaleString() : 'No Information Available'} SQFT</p>                  <p>Year Built: {property.yearBuilt ?? 'No Information Available'}</p>
+                  <button className="Add-Btn" onClick={() => addtoPort()}>Add To Portfolio</button>                
                 </div>
               </div>
             ))}
-            <button className="Add-Btn">Add To Portfolio</button>
           </div>
         )}
       </div>
